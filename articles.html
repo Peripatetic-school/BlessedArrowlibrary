@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>المقالات — القِدحُ المُعَلَّى</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="brand">
+      <svg class="logo" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+        <circle cx="50" cy="50" r="46" stroke="currentColor" stroke-width="2.5"/>
+        <path d="M50 24 L66 52 L57 52 L57 76 L43 76 L43 52 L34 52 Z" fill="currentColor"/>
+      </svg>
+      <div class="brand-text">
+        <span class="brand-name">القِدحُ المُعَلَّى</span>
+        <span class="brand-sub">مكتبة مستقلة</span>
+      </div>
+    </a>
+    <nav class="nav-desktop">
+      <a href="index.html">الرئيسية</a>
+      <a href="books.html">الكتب</a>
+      <a href="articles.html" class="active">المقالات</a>
+      <a href="about.html">عن المكتبة</a>
+    </nav>
+    <button class="menu-toggle" aria-label="القائمة" onclick="document.getElementById('menuDropdown').classList.toggle('open')">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </div>
+  <div class="menu-dropdown" id="menuDropdown">
+    <a href="index.html">الرئيسية</a>
+    <a href="books.html">الكتب</a>
+    <a href="articles.html">المقالات</a>
+    <a href="about.html">عن المكتبة</a>
+  </div>
+</header>
+
+<main>
+  <div class="page-header">
+    <h1 class="page-title">المقالات</h1>
+  </div>
+
+  <div class="articles-categories">
+    الفلسفة <span class="sep">·</span>
+    المنطق والرياضيات <span class="sep">·</span>
+    اللغة <span class="sep">·</span>
+    الاقتصاد والهندسة المالية <span class="sep">·</span>
+    السياسة والاجتماع <span class="sep">·</span>
+    الأبحاث الطبية والصيدلية <span class="sep">·</span>
+    الأدب ونظريات الشعر والنقد
+  </div>
+
+  <div class="articles-list" id="articlesList"></div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-text">
+      <p>جميع هذه الأعمال والمواد نتاجٌ فرديٌ مستقلٌ محفوظ الحقوق 2027 ©، يُمنع نسخها أو إعادة توزيعها دون إذن كتابي مسبق.</p>
+      <p>إن اقتناء الكتاب يمنحك حق القراءة شخصياً ولا يمنحك حق إعادة النشر.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script>
+  const list = document.getElementById('articlesList');
+  const entries = Object.entries(libraryData.articles);
+
+  if (entries.length === 0) {
+    list.innerHTML = '<div class="placeholder-note">لا توجد مقالات بعد.</div>';
+  } else {
+    entries.forEach(([id, art]) => {
+      const a = document.createElement('a');
+      a.href = `article.html?id=${id}`;
+      a.className = 'article-item';
+      a.innerHTML = `
+        <div class="article-item-title">${art.title}</div>
+        <div class="article-item-cat">${art.category}</div>
+      `;
+      list.appendChild(a);
+    });
+  }
+</script>
+</body>
+</html>
