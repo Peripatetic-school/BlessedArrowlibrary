@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الكتاب — القِدحُ المُعَلَّى</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="brand">
+      <svg class="logo" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+        <circle cx="50" cy="50" r="46" stroke="currentColor" stroke-width="2.5"/>
+        <path d="M50 24 L66 52 L57 52 L57 76 L43 76 L43 52 L34 52 Z" fill="currentColor"/>
+      </svg>
+      <div class="brand-text">
+        <span class="brand-name">القِدحُ المُعَلَّى</span>
+        <span class="brand-sub">مكتبة مستقلة</span>
+      </div>
+    </a>
+    <nav class="nav-desktop">
+      <a href="index.html">الرئيسية</a>
+      <a href="books.html" class="active">الكتب</a>
+      <a href="articles.html">المقالات</a>
+      <a href="about.html">عن المكتبة</a>
+    </nav>
+    <button class="menu-toggle" aria-label="القائمة" onclick="document.getElementById('menuDropdown').classList.toggle('open')">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </div>
+  <div class="menu-dropdown" id="menuDropdown">
+    <a href="index.html">الرئيسية</a>
+    <a href="books.html">الكتب</a>
+    <a href="articles.html">المقالات</a>
+    <a href="about.html">عن المكتبة</a>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <a href="books.html" class="back-link">← العودة إلى الكتب</a>
+    <div class="book-page" id="bookPage"></div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-text">
+      <p>جميع هذه الأعمال والمواد نتاجٌ فرديٌ مستقلٌ محفوظ الحقوق 2027 ©، يُمنع نسخها أو إعادة توزيعها دون إذن كتابي مسبق.</p>
+      <p>إن اقتناء الكتاب يمنحك حق القراءة شخصياً ولا يمنحك حق إعادة النشر.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+  const book = libraryData.books[id];
+  const container = document.getElementById('bookPage');
+
+  if (!book) {
+    container.innerHTML = '<div class="placeholder-note">لم يتم العثور على الكتاب المطلوب. <a href="books.html">العودة إلى قائمة الكتب</a></div>';
+  } else {
+    document.title = book.title + ' — القِدحُ المُعَلَّى';
+    const quotesHtml = (book.quotes && book.quotes.length)
+      ? '<h2>اقتباسات</h2>' + book.quotes.map(q => `<div class="quote-block">${q}</div>`).join('')
+      : '';
+
+    container.innerHTML = `
+      <div class="book-page-header">
+        <img src="${book.cover}" alt="غلاف ${book.title}" class="book-page-cover" onerror="this.style.visibility='hidden'">
+        <div class="book-page-info">
+          <h1 class="book-page-title">${book.title}</h1>
+          <div class="book-page-meta">${book.type} · ${book.status === 'published' ? 'منشور' : 'قريباً'}</div>
+        </div>
+      </div>
+      <div class="book-page-content">
+        <h2>ملخص الكتاب</h2>
+        <p>${book.description}</p>
+        <h2>نبذة عن المحتوى</h2>
+        <p>${book.contentOverview}</p>
+        ${quotesHtml}
+      </div>
+    `;
+  }
+</script>
+</body>
+</html>
