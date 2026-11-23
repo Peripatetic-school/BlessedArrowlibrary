@@ -1,255 +1,131 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- ✏️ عدّل هنا: عنوان الصفحة (يظهر في تبويب المتصفح) -->
-    <title>مكتبة [اسم المكتبة]</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #2c3e50;
-            --accent-color: #3498db;
-            --bg-color: #f8f9fa;
-            --card-bg: #ffffff;
-            --text-color: #333;
-            --text-muted: #6c757d;
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: 'Cairo', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        /* الترويسة والشعار */
-        header {
-            background-color: var(--card-bg);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            padding: 20px 0;
-            margin-bottom: 40px;
-        }
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        .library-brand {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .library-logo {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--accent-color);
-        }
-        .library-name {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-        .telegram-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background-color: #0088cc;
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: background 0.3s;
-        }
-        .telegram-btn:hover {
-            background-color: #006699;
-        }
-        .telegram-btn svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-        }
-        /* شبكة الكتب */
-        .books-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
-        }
-        .book-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
-        .book-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        }
-        .book-cover {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            background-color: #eee;
-        }
-        .book-info {
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-        .book-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: var(--primary-color);
-        }
-        .book-desc {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            margin-bottom: 15px;
-            flex-grow: 1;
-        }
-        .book-badge {
-            display: inline-block;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            width: fit-content;
-        }
-        .badge-published {
-            background-color: #d4edda;
-            color: #155724;
-        }
-        .badge-soon {
-            background-color: #fff3cd;
-            color: #856404;
-        }
-        .book-link {
-            display: inline-block;
-            text-align: center;
-            background-color: var(--accent-color);
-            color: white;
-            text-decoration: none;
-            padding: 10px;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: background 0.3s;
-            margin-top: auto;
-        }
-        .book-link:hover {
-            background-color: #2980b9;
-        }
-        .book-link.disabled {
-            background-color: #bdc3c7;
-            cursor: not-allowed;
-            pointer-events: none;
-        }
-        footer {
-            text-align: center;
-            padding: 30px 0;
-            color: var(--text-muted);
-            border-top: 1px solid #e9ecef;
-        }
-        @media (max-width: 600px) {
-            .header-content { justify-content: center; text-align: center; }
-            .books-grid { grid-template-columns: 1fr; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>القِدحُ المُعَلَّى — مكتبة مستقلة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <div class="container header-content">
-            <div class="library-brand">
-                <!-- ✏️ عدّل هنا: ضع رابط صورة الشعار الخاص بمكتبتك -->
-                <img src="https://via.placeholder.com/60" alt="شعار المكتبة" class="library-logo" id="logo">
-                <!-- ✏️ عدّل هنا: اسم المكتبة -->
-                <span class="library-name">مكتبة [اسم المكتبة]</span>
-            </div>
-            <!-- ✏️ عدّل هنا: ضع معرف قناتك على تلغرام (بدون @) -->
-            <a href="https://t.me/YOUR_USERNAME" target="_blank" class="telegram-btn">
-                <svg viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
-                انضم إلى القناة
-            </a>
+<!-- ============ الترويسة ============ -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="brand">
+      <!-- استبدل الـ SVG التالي بصورة شعارك إن أردت:
+           <img src="logo.png" alt="شعار المكتبة" class="logo"> -->
+      <svg class="logo" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+        <circle cx="50" cy="50" r="46" stroke="currentColor" stroke-width="2.5"/>
+        <path d="M50 24 L66 52 L57 52 L57 76 L43 76 L43 52 L34 52 Z" fill="currentColor"/>
+      </svg>
+      <div class="brand-text">
+        <span class="brand-name">القِدحُ المُعَلَّى</span>
+        <span class="brand-sub">مكتبة مستقلة</span>
+      </div>
+    </a>
+    <nav class="nav-desktop">
+      <a href="index.html" class="active">الرئيسية</a>
+      <a href="books.html">الكتب</a>
+      <a href="articles.html">المقالات</a>
+      <a href="about.html">عن المكتبة</a>
+    </nav>
+    <button class="menu-toggle" aria-label="القائمة" onclick="document.getElementById('menuDropdown').classList.toggle('open')">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </div>
+  <div class="menu-dropdown" id="menuDropdown">
+    <a href="index.html">الرئيسية</a>
+    <a href="books.html">الكتب</a>
+    <a href="articles.html">المقالات</a>
+    <a href="about.html">عن المكتبة</a>
+  </div>
+</header>
+
+<main>
+  <!-- ============ المقدمة ============ -->
+  <section class="hero">
+    <div class="container">
+      <h1 class="hero-title">القِدحُ المُعَلَّى</h1>
+      <p class="hero-topics">
+        نظرية المعرفة <span class="sep">·</span>
+        العلوم النظرية المجردة والطبيعية <span class="sep">·</span>
+        العلوم العملية <span class="sep">·</span>
+        فلسفة اللغة <span class="sep">·</span>
+        فلسفة الفنون
+      </p>
+      <div class="hero-note">
+        <p>أعمال المكتبة نتاج عمل فردي مستقل، لا تقف خلفها دار نشر ولا جهة تمويل.</p>
+        <span class="blessing">بمدد الله أستمر.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ المستطيلات الثلاثة ============ -->
+  <div class="container">
+    <div class="quick-cards">
+      <a href="books.html" class="quick-card">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+        </svg>
+        <span class="card-label">قائمة الكتب</span>
+        <span class="card-desc">الكتب المنشورة</span>
+      </a>
+      <a href="books.html" class="quick-card">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 20h9"/>
+          <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+        </svg>
+        <span class="card-label">قائمة المؤلفات</span>
+        <span class="card-desc">الأعمال قيد الإعداد</span>
+      </a>
+      <a href="https://t.me/BlessedArrowlibrary" target="_blank" rel="noopener" class="quick-card telegram">
+        <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/>
+        </svg>
+        <span class="card-label">القناة</span>
+        <span class="card-desc">انضم على تلغرام</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ============ يصدر قريبًا ============ -->
+  <section class="upcoming">
+    <div class="container">
+      <h2 class="section-title">يصدر قريباً</h2>
+      <p class="section-subtitle">أعمال قيد الإعداد والمراجعة</p>
+      <div class="upcoming-list">
+        <div class="upcoming-item">
+          <span class="upcoming-title">في مبرهنات كورت غوديل</span>
+          <span class="upcoming-type">مؤلف</span>
         </div>
-    </header>
-
-    <main class="container">
-        <div class="books-grid" id="booksGrid">
-            <!-- سيتم إدراج الكتب هنا تلقائيًا بواسطة JavaScript -->
+        <div class="upcoming-item">
+          <span class="upcoming-title">دليل الدواء العربي</span>
+          <span class="upcoming-type">مرجع</span>
         </div>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>© <span id="year"></span> مكتبة [اسم المكتبة]. جميع الحقوق محفوظة.</p>
+        <div class="upcoming-item">
+          <span class="upcoming-title">دراسة عن الوعي</span>
+          <span class="upcoming-type">ترجمة</span>
         </div>
-    </footer>
+      </div>
+    </div>
+  </section>
+</main>
 
-    <script>
-        // ✏️ عدّل هنا: بيانات الكتب (أضف أو احذف كتبًا حسب حاجتك)
-        const books = [
-            {
-                title: "عنوان الكتاب الأول",
-                description: "وصف مختصر للكتاب المنشور. يمكنك كتابة نبذة قصيرة عن محتواه.",
-                cover: "https://via.placeholder.com/300x250?text=غلاف+الكتاب",
-                status: "published", // "published" للمنشور، و "soon" للقادم
-                link: "https://example.com" // رابط الشراء أو التحميل (اتركه فارغًا للكتب القادمة)
-            },
-            {
-                title: "عنوان الكتاب الثاني",
-                description: "هذا الكتاب قيد التأليف وسيصدر قريبًا. ترقبوا المزيد من التفاصيل.",
-                cover: "https://via.placeholder.com/300x250?text=قريباً",
-                status: "soon",
-                link: ""
-            }
-            // يمكنك إضافة المزيد من الكتب بنفس الطريقة
-        ];
-
-        const booksGrid = document.getElementById('booksGrid');
-
-        books.forEach(book => {
-            const card = document.createElement('div');
-            card.className = 'book-card';
-
-            const badgeClass = book.status === 'published' ? 'badge-published' : 'badge-soon';
-            const badgeText = book.status === 'published' ? 'منشور' : 'قريباً';
-            const linkClass = book.status === 'published' ? 'book-link' : 'book-link disabled';
-            const linkText = book.status === 'published' ? 'عرض / تحميل' : 'قريباً';
-            const linkHref = book.link || '#';
-
-            card.innerHTML = `
-                <img src="${book.cover}" alt="غلاف ${book.title}" class="book-cover" onerror="this.src='https://via.placeholder.com/300x250?text=لا+توجد+صورة'">
-                <div class="book-info">
-                    <h3 class="book-title">${book.title}</h3>
-                    <p class="book-desc">${book.description}</p>
-                    <span class="book-badge ${badgeClass}">${badgeText}</span>
-                    <a href="${linkHref}" class="${linkClass}" target="_blank">${linkText}</a>
-                </div>
-            `;
-            booksGrid.appendChild(card);
-        });
-
-        // تحديث سنة الحقوق تلقائيًا
-        document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
+<!-- ============ التذييل ============ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-text">
+      <p>جميع هذه الأعمال والمواد نتاجٌ فرديٌ مستقلٌ محفوظ الحقوق 2027 ©، يُمنع نسخها أو إعادة توزيعها دون إذن كتابي مسبق.</p>
+      <p>إن اقتناء الكتاب يمنحك حق القراءة شخصياً ولا يمنحك حق إعادة النشر.</p>
+    </div>
+  </div>
+</footer>
 
 </body>
-  </html>
+</html>
