@@ -1,320 +1,255 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3D- Portfolio Book</title>
-    <!-- BoxIcon -->
-    <link
-      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-      rel="stylesheet"
-    />
-    <!-- style -->
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="wrapper">
-      <div class="cover cover-left"></div>
-      <div class="cover cover-right"></div>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ✏️ عدّل هنا: عنوان الصفحة (يظهر في تبويب المتصفح) -->
+    <title>مكتبة [اسم المكتبة]</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333;
+            --text-muted: #6c757d;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        /* الترويسة والشعار */
+        header {
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 20px 0;
+            margin-bottom: 40px;
+        }
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .library-brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .library-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-color);
+        }
+        .library-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        .telegram-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #0088cc;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        .telegram-btn:hover {
+            background-color: #006699;
+        }
+        .telegram-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+        /* شبكة الكتب */
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        .book-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        .book-cover {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background-color: #eee;
+        }
+        .book-info {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .book-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+        }
+        .book-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+        .book-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            width: fit-content;
+        }
+        .badge-published {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .badge-soon {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .book-link {
+            display: inline-block;
+            text-align: center;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background 0.3s;
+            margin-top: auto;
+        }
+        .book-link:hover {
+            background-color: #2980b9;
+        }
+        .book-link.disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: var(--text-muted);
+            border-top: 1px solid #e9ecef;
+        }
+        @media (max-width: 600px) {
+            .header-content { justify-content: center; text-align: center; }
+            .books-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
 
-      <div class="book">
-        <!-- profile page -->
-        <div class="book-page page-left">
-          <div class="profile-page">
-            <img src="./Logo.png" alt="" />
-            <h1>Mr Skeleton</h1>
-            <h3>Web Developer</h3>
-
-            <div class="social-media">
-              <a href="#"><i class="bx bxl-facebook"></i></a>
-              <a href="#"><i class="bx bxl-twitter"></i></a>
-              <a href="#"><i class="bx bxl-instagram"></i></a>
-              <a href="#"><i class="bx bxl-linkedin-square"></i></a>
+    <header>
+        <div class="container header-content">
+            <div class="library-brand">
+                <!-- ✏️ عدّل هنا: ضع رابط صورة الشعار الخاص بمكتبتك -->
+                <img src="https://via.placeholder.com/60" alt="شعار المكتبة" class="library-logo" id="logo">
+                <!-- ✏️ عدّل هنا: اسم المكتبة -->
+                <span class="library-name">مكتبة [اسم المكتبة]</span>
             </div>
-
-            <p>
-              Hi, I'm a web Developer. Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Neque commodi numquam dolor a
-              deserunt incidunt esse molestias voluptatum porro ullam.
-            </p>
-
-            <div class="btn-box">
-              <a href="#" class="btn">Download CV</a>
-              <a href="#" class="btn contact-me">Contact Me!</a>
-            </div>
-          </div>
+            <!-- ✏️ عدّل هنا: ضع معرف قناتك على تلغرام (بدون @) -->
+            <a href="https://t.me/YOUR_USERNAME" target="_blank" class="telegram-btn">
+                <svg viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+                انضم إلى القناة
+            </a>
         </div>
+    </header>
 
-        <!-- page 1 & 2 -->
-        <div class="book-page page-right turn" id="turn-1">
-          <!-- page 1 (work experience) -->
-          <div class="page-front">
-            <h1 class="title">Work Experience</h1>
-
-            <div class="workeduc-box">
-              <div class="workeduc-content">
-                <span class="year"
-                  ><i class="bx bxs-calendar"></i>2018 - 2020</span
-                >
-                <h3>Web Developer - Software Pro</h3>
-                <p>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Molestiae minus eius nemo. Optio cupiditate nostrum commodi
-                  repellendus nemo quod in?
-                </p>
-              </div>
-
-              <div class="workeduc-content">
-                <span class="year"
-                  ><i class="bx bxs-calendar"></i>2021 - 2022</span
-                >
-                <h3>Web Designer - Software Pro</h3>
-                <p>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Molestiae minus eius nemo. Optio cupiditate nostrum commodi
-                  repellendus nemo quod in?
-                </p>
-              </div>
-
-              <div class="workeduc-content">
-                <span class="year"
-                  ><i class="bx bxs-calendar"></i>2022 - 2023</span
-                >
-                <h3>Graphic Designer - Software Pro</h3>
-                <p>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Molestiae minus eius nemo. Optio cupiditate nostrum commodi
-                  repellendus nemo quod in?
-                </p>
-              </div>
-            </div>
-            <span class="number-page">1</span>
-
-            <!-- next button -->
-            <span class="nextprev-btn" data-page="turn-1">
-              <i class="bx bx-chevron-right"></i>
-            </span>
-          </div>
-
-          <!-- page 2 (education) -->
-          <div class="page-back">
-            <h1 class="title">Education</h1>
-
-            <div class="workeduc-box">
-              <div class="workeduc-content">
-                <span class="year"
-                  ><i class="bx bxs-calendar"></i>2016 - 2018</span
-                >
-                <h3>College</h3>
-                <p>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Molestiae minus eius nemo. Optio cupiditate nostrum commodi
-                  repellendus nemo quod in?
-                </p>
-              </div>
-
-              <div class="workeduc-content">
-                <span class="year"
-                  ><i class="bx bxs-calendar"></i>2018 - 2020</span
-                >
-                <h3>Intermediate</h3>
-                <p>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Molestiae minus eius nemo. Optio cupiditate nostrum commodi
-                  repellendus nemo quod in?
-                </p>
-              </div>
-
-              <div class="workeduc-content">
-                <span class="year"
-                  ><i class="bx bxs-calendar"></i>2020 - 2024</span
-                >
-                <h3>BS Computer Science</h3>
-                <p>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Molestiae minus eius nemo. Optio cupiditate nostrum commodi
-                  repellendus nemo quod in?
-                </p>
-              </div>
-            </div>
-
-            <span class="number-page">2</span>
-
-            <!-- prev button -->
-            <span class="nextprev-btn back" data-page="turn-1">
-              <i class="bx bx-chevron-left"></i>
-            </span>
-          </div>
+    <main class="container">
+        <div class="books-grid" id="booksGrid">
+            <!-- سيتم إدراج الكتب هنا تلقائيًا بواسطة JavaScript -->
         </div>
+    </main>
 
-
-        <!-- page 3 & 4 -->
-        <div class="book-page page-right turn" id="turn-2">
-          <!-- page 3 (my services) -->
-          <div class="page-front">
-            <h1 class="title">My Services</h1>
-
-            <div class="services-box">
-              <div class="services-content">
-                <i class="bx bx-code-alt"></i>
-                <h3>Web Development</h3>
-                <p>
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nisi
-                  quae accusamus aliquam.
-                </p>
-                <a href="#" class="btn">Read More</a>
-              </div>
-
-              <div class="services-content">
-                <i class="bx bxs-paint"></i>
-                <h3>Creative Design</h3>
-                <p>
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nisi
-                  quae accusamus aliquam.
-                </p>
-                <a href="#" class="btn">Read More</a>
-              </div>
-
-              <div class="services-content">
-                <i class="bx bx-bar-chart-alt"></i>
-                <h3>Digital Marketing</h3>
-                <p>
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nisi
-                  quae accusamus aliquam.
-                </p>
-                <a href="#" class="btn">Read More</a>
-              </div>
-
-              <div class="services-content">
-                <i class="bx bx-search"></i>
-                <h3>SEO</h3>
-                <p>
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nisi
-                  quae accusamus aliquam.
-                </p>
-                <a href="#" class="btn">Read More</a>
-              </div>
-            </div>
-
-            <span class="number-page">3</span>
-
-            <!-- next button -->
-            <span class="nextprev-btn" data-page="turn-2">
-              <i class="bx bx-chevron-right"></i>
-            </span>
-
-          </div>
-          <!-- page 4 (my skills) -->
-          <div class="page-back">
-            <h1 class="title">My Skills</h1>
-
-            <div class="skills-box">
-              <div class="skills-content">
-                <h3>Front-End</h3>
-                <div class="content">
-                  <span><i class="bx bxl-html5"></i> HTML</span>
-                  <span><i class="bx bxl-css3"></i>CSS</span>
-                  <span><i class="bx bxl-javascript"></i>JS</span>
-                  <span><i class="bx bxl-angular"></i>Angular</span>
-                  <span><i class="bx bxl-react"></i>React Js</span>
-                  <span><i class="bx bxl-bootstrap"></i>BootStrap</span>
-                  <span><i class="bx bxl-jquery"></i>Jquery</span>
-                </div>
-              </div>
-
-              <div class="skills-content">
-                <h3>Back-End</h3>
-                <div class="content">
-                  <span><i class="bx bxl-python"></i>Python</span>
-                  <span><i class="bx bxl-java"></i>Java</span>
-                  <span><i class="bx bxl-nodejs"></i>Node JS</span>
-                  <span><i class="bx bxl-php"></i>PHP</span>
-                </div>
-              </div>
-
-              <div class="skills-content">
-                <h3>UI/UX Design</h3>
-                <div class="content">
-                  <span><i class="bx bxl-figma"></i>Figma</span>
-                </div>
-              </div>
-            </div>
-
-            <span class="number-page">4</span>
-
-            <!-- next button -->
-            <span class="nextprev-btn back" data-page="turn-2">
-              <i class="bx bx-chevron-left"></i>
-            </span>
-          </div>
+    <footer>
+        <div class="container">
+            <p>© <span id="year"></span> مكتبة [اسم المكتبة]. جميع الحقوق محفوظة.</p>
         </div>
+    </footer>
 
-            <!-- page 5 & 6 -->
-            <div class="book-page page-right turn" id="turn-3">
-                <!-- page 5 (latest project or many portfolio) -->
-                <div class="page-front">
-                    <h1 class="title">Latest Project</h1>
+    <script>
+        // ✏️ عدّل هنا: بيانات الكتب (أضف أو احذف كتبًا حسب حاجتك)
+        const books = [
+            {
+                title: "عنوان الكتاب الأول",
+                description: "وصف مختصر للكتاب المنشور. يمكنك كتابة نبذة قصيرة عن محتواه.",
+                cover: "https://via.placeholder.com/300x250?text=غلاف+الكتاب",
+                status: "published", // "published" للمنشور، و "soon" للقادم
+                link: "https://example.com" // رابط الشراء أو التحميل (اتركه فارغًا للكتب القادمة)
+            },
+            {
+                title: "عنوان الكتاب الثاني",
+                description: "هذا الكتاب قيد التأليف وسيصدر قريبًا. ترقبوا المزيد من التفاصيل.",
+                cover: "https://via.placeholder.com/300x250?text=قريباً",
+                status: "soon",
+                link: ""
+            }
+            // يمكنك إضافة المزيد من الكتب بنفس الطريقة
+        ];
 
-                    <div class="portfolio-box">
-                        <div class="img-box">
-                            <img src="website 3.png" alt="">
-                        </div>
+        const booksGrid = document.getElementById('booksGrid');
 
-                        <div class="info-box">
-                            <div class="info-title">
-                                <h3>Project Name</h3>
-                                <a href="#">Live Preview <i class="bx bx-link-external"></i></a>
-                            </div>
-                            <p>Tech Used:</p>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio, vel ipsum quis possimus quaerat voluptatem temporibus saepe veniam?</p>
-                        </div>
-                        <div class="btn-box">
-                            <a href="#" class="btn">Source Code</a>
-                            <a href="#" class="btn">More Projects</a>
-    
-                        </div>
-                    </div>
+        books.forEach(book => {
+            const card = document.createElement('div');
+            card.className = 'book-card';
 
-                    <span class="number-page">5</span>
+            const badgeClass = book.status === 'published' ? 'badge-published' : 'badge-soon';
+            const badgeText = book.status === 'published' ? 'منشور' : 'قريباً';
+            const linkClass = book.status === 'published' ? 'book-link' : 'book-link disabled';
+            const linkText = book.status === 'published' ? 'عرض / تحميل' : 'قريباً';
+            const linkHref = book.link || '#';
 
-                    <!-- next button -->
-                    <span class="nextprev-btn" data-page="turn-3">
-                      <i class="bx bx-chevron-right"></i>
-                    </span>
+            card.innerHTML = `
+                <img src="${book.cover}" alt="غلاف ${book.title}" class="book-cover" onerror="this.src='https://via.placeholder.com/300x250?text=لا+توجد+صورة'">
+                <div class="book-info">
+                    <h3 class="book-title">${book.title}</h3>
+                    <p class="book-desc">${book.description}</p>
+                    <span class="book-badge ${badgeClass}">${badgeText}</span>
+                    <a href="${linkHref}" class="${linkClass}" target="_blank">${linkText}</a>
                 </div>
+            `;
+            booksGrid.appendChild(card);
+        });
 
+        // تحديث سنة الحقوق تلقائيًا
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
 
-                <!-- page 6 (contact me!) -->
-                <div class="page-back">
-                    <h1 class="title">Contact Me!</h1>
-
-                    <div class="contact-box">
-                      <form action="">
-                        <input type="text" class="field" placeholder="Full Name" required>
-                        <input type="email" class="field" placeholder="Email Address" required>
-                        <textarea name="" id="" cols="30" rows="10" class="field" placeholder="Your Message"></textarea>
-                        <input type="submit" value="Send Message" class="btn">
-                      </form>
-                    </div>
-
-                    <span class="number-page">6</span>
-
-                    <!-- next button -->
-                    <span class="nextprev-btn back" data-page="turn-3">
-                      <i class="bx bx-chevron-left"></i>
-                    </span>
-
-                    <a href="#" class="back-profile">
-                      <p>Profile</p>
-                      <i class="bx bxs-user"></i>
-                    </a>
-                </div>
-
-            </div>
-      </div>
-    </div>
-
-    <!-- script -->
-    <script src="script.js"></script>
-  </body>
-</html>
+</body>
+  </html>
